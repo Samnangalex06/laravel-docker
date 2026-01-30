@@ -18,3 +18,18 @@ Route::post('/products', [ProductController::class, 'createProduct']);
 Route::get('/products/{productId}', [ProductController::class, 'getProduct']);
 Route::patch('/products/{productId}', [ProductController::class, 'updateProduct']);
 Route::delete('/products/{productId}', [ProductController::class, 'deleteProduct']);
+Route::get('/authors/{id}/articles', function($id){
+    return Author::find($id)->articles;
+});
+Route::get('/articles/{id}/audiences', function($id){
+    return Article::find($id)->audiences;
+});
+Route::get('/authors/{id}/audiences', function($id){
+    return Author::find($id)->audiences;
+});
+Route::get('/audiences/{id}/comments', function($id){
+    return Audience::find($id)->comments;
+});
+Route::get('/comments', function(){
+    return Comment::with('commentable')->get();
+});
